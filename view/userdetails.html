@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+	<!--首页模板-->
+<head>
+	<title>蒙多电影资讯网--个人中心</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="public/css/style.css" type="text/css" media="all" />
+	<!--[if IE 6]>
+		<link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" />
+	<![endif]-->
+	<script type="text/javascript" src="public/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="public/js/jquery-func.js"></script>
+</head>
+<body>
+	<a name="top"></a>
+<!-- Shell -->
+<div id="shell">
+	<!-- Header -->
+	<div id="header">
+		<h1 style="float:left;" id="logo"><a href="index.php?c=index&a=show">蒙多电影资讯网</a></h1>
+		<div style="color:#f2a223;float:left;font-size:28px;"><i><b>蒙多电影资讯网--个人中心</b></i></div>
+		<div class="social">
+			<span style='font-size:14px;margin-top:6px;margin-left:6px;'><label>点击右侧分享:</label></span><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+		</div>
+		
+		<!-- Navigation -->
+		<div id="navigation">
+			<ul>
+			    <li><a class="active" href="index.php?c=index&a=show">首页</a></li>
+			    <li><a href="index.php?c=manage&a=show&id=1&id1=manage">个人中心</a></li>
+			    <li><a href="index.php?c=about&a=show">关于我们</a></li>
+			    <li><a href="index.php?c=privilege&a=logout" onclick="return confirm('确定退出吗?')">退出登录</a></li>
+			</ul>
+		</div>
+		<!-- end Navigation -->
+		
+		<!-- Sub-menu -->
+		<div id="sub-navigation" style="border-top:0px;">
+		</div>
+		<!-- end Sub-Menu -->
+		
+	</div>
+	<!-- end Header -->
+	
+	<!-- Main -->
+	<div id="main">
+		<!-- Content -->
+		<div id="content">
+
+			<!-- Box -->
+		
+			<!-- end Box -->
+			
+
+			<!-- end Box -->
+			
+		</div>
+		<!-- end Content -->
+
+		<!-- end NEWS -->
+		
+		<!-- Coming -->
+		<div id="news" style="font-size:14px;">
+			<div class="head" style="font-size:16px;margin-bottom:20px;">
+		<div style="float:left;width:900px;" id="coming">
+			<div class="head">
+				<h3 style="font-size:25px;">个人评论管理中心<strong></strong></h3>
+			</div>
+			
+				<h4 style="font-size:20px;margin-top:22px;margin-bottom:22px;">欢迎您!</h4>
+				<p style="height:300px;width:;border:0px red solid;">
+				
+				<img style="height:300px;" src="public/images/<?php echo $arr_infos['u_image']?>" alt="还需要上传一个萌萌哒的头像喵n(*≧▽≦*)n">
+				
+				<form enctype="multipart/form-data" method="post" action="index.php?c=manage&a=add&id=<?php echo $arr_infos['u_user']?>">
+					<br />
+				<label>点击上传个人形象
+				<input type="file" name="u_image">
+				</label>
+				<br />
+				<input type="submit" name="submit" value="点击提交">
+				</p>
+				<p>用户名:<?php echo $arr_infos['u_user']?></p>
+				<span>上次登录时间:<?php echo !empty($arr_infos['u_last_log_time'])?date('Y年m月d日 H:i:s',$arr_infos['u_last_log_time']) :'您当前是第一次登陆,下次登陆时才能够查看时间' ;?></p>
+				<p>上次登录IP:<?php echo !empty($arr_infos['u_last_log_ip'])?$arr_infos['u_last_log_ip'] :'您当前是第一次登陆,下次登陆时才能够查看IP地址' ;?></p>
+				<p>您发表的评论:<?php echo $arr_reviews? '共'.count($arr_reviews).'条'."<a style='float:right;margin-right:20px;' href='#bottom'>跳转到底部</a>":'您当前还未发表任何评论';?></p>
+				<br />
+				<p>发表的评论<br />
+				<!--此处需要循环-->
+				<?php foreach($arr_reviews as $v):
+				$detail = new Details();
+				$arr_movie = $detail -> getInfos($v['i_id']);
+				?>
+				<?php if($v['r_is_allowed']):?>
+				<div style="border:1px dashed #ccc;margin-bottom:5px;">
+				标题:<?php echo $v['r_title']?>
+				<span style="float:right;">该信息是对:<a href="index.php?c=details&a=details&id=<?php echo $arr_movie['i_id'];?>"><?php echo $arr_movie['i_name']; ?></a>的评论</span>
+				<br />内容:<?php echo stripslashes($v['r_contents'])?><br />发表于:<?php echo date("Y年m月d日 H:i:s",$v['r_date'])?><a style="float:right;" href="index.php?c=review&a=del&id=<?php echo $v['r_id']?>" onclick="return confirm('确定要删除吗?')">删除该评论</a></p>
+				</div>
+				<?php endif;?>
+				<?php endforeach;?>
+				<!--循环结束-->
+				</div>
+				</div>
+			
+		</div>
+		<!-- end Coming -->
+		<div class="cl">&nbsp;</div>
+	</div>
+			<div style="border:0px;" id="sub-navigation">
+		</div>
+		
+		<div style="border:0px;" id="sub-navigation">
+
+		</div>
+
+		<a style="margin-right:50px;float:right;" href="#top">返回顶部</a>
+	<!-- end Main -->
+	<a name="bottom"></a>
+	<div id="footer" style="font-size:14px;">
+		<p>
+			<a href="index.php?c=index&a=show">首页</a> <span>|</span>
+			<a href="index.php?c=about&a=show">关于我们 </a><span>|</span>
+			<a href="index.php?c=manage&a=show">个人中心 </a><span>|</span>
+			<a href="index.php?c=privilege&a=logout" onclick="return confirm('确定退出吗?')">退出登录</a>
+		</p>
+		<p> &copy; 2015 蒙多电影资讯网 All Rights Reserved.  Designed by <a href="http://www.lestatlee.com" target="_blank" title="Open The Future">lestatlee.com</a></p>
+	</div>
+</div>
+<!-- end Shell -->
+</body>
+</html>

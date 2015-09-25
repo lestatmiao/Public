@@ -1,0 +1,50 @@
+<!-- $Id: category_list.htm 17019 2010-01-29 10:10:34Z liuhui $ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>影片信息管理中心 - 商品分类 </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/general.css" rel="stylesheet" type="text/css" />
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<h1>
+<span class="action-span"><a href="category.php?act=web">发布新的网站信息</a></span>
+<span class="action-span1"><a href="">影片信息管理中心</a> </span><span id="search_id" class="action-span1"> - 网站信息列表 </span>
+<div style="clear:both"></div>
+</h1>
+
+<form method="post" action="" name="listForm">
+
+<div class="list-div" id="listDiv">
+
+<table width="100%" cellspacing="1" cellpadding="2" id="list-table">
+  <tr>
+    <th>序号</th>
+    <th>信息标题</th>
+    <th>信息内容</th>
+    <th>操作</th>
+  </tr>
+  <?php foreach($lists as $k => $v):?>
+    <tr>
+    <td><?php echo ($k + 1);?></td>
+    <td><?php echo $v['w_title'];?></td>
+    <td><?php echo $v['w_contents'];?></td>
+    <td><a href='category.php?act=default&id=<?php echo $v['w_id']?>' onclick="return confirm('确定要将该信息设为默认？');">设置为默认</a></td>
+    </tr>
+  <?php endforeach;?>
+  </table>
+</div>
+</form>
+
+
+<div id="footer">
+
+版权所有 &copy; 影讯网</div>
+
+</div>
+
+</body>
+</html>

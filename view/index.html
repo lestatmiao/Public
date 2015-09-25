@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+	<!--首页模板-->
+<head>
+	<title>蒙多电影资讯网</title>
+	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="public/css/style.css" type="text/css" media="all" />
+	<!--[if IE 6]>
+		<link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" />
+	<![endif]-->
+	<script charset="gbk" src="http://www.baidu.com/js/opensug.js"></script>
+	
+	<script type="text/javascript" src="public/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="public/js/jquery-func.js"></script>
+</head>
+<body>
+<!-- Shell -->
+<div id="shell">
+	<a name="top"></a>
+	<!-- Header -->
+	<div id="header">
+		<h1 style="float:left;" id="logo"><a href="index.php?c=index&a=show" title="Open The Future"></a></h1>
+		<div style="color:#f2a223;float:left;font-size:28px;"><label><i><b>蒙多电影资讯网</b></i></label></div>
+		<div class="social">
+			<span style='font-size:14px;margin-top:6px;margin-left:6px;'><label>点击右侧分享:</label></span><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+		</div>
+		
+		<!-- Navigation -->
+		<div id="navigation" style="padding-bottom:12px;">
+			<ul>
+			    <li><a class="active" href="index.php?c=index&a=show">首页</a></li>
+			    <li><a href="#news">新闻</a></li>
+			    <li><a href="index.php?c=manage&a=show&id=1&id1=manage">个人中心</a></li>
+			    <li><a href="index.php?c=about&a=show">关于我们</a></li>
+			    <?php 
+					if(isset($_SESSION['user'])){
+				?>
+				<li><a href="index.php?c=privilege&a=logout" onclick="return confirm('确定要退出吗?')">退出登录</a></li>
+				<?php }else{?>
+				<li><a href="index.php?c=privilege&a=login">点击登录</a></li>
+				<?php }?>
+				<br />
+				<li style="color:gold;font-size:14px;">在下方框内输入城市名和影院名可查询该影院近期上映电影</li>
+			</ul>
+		</div>
+		<!-- end Navigation -->
+		
+		<!-- Sub-menu -->
+		<div id="sub-navigation">
+			<ul>
+				<?php if(!isset($_SESSION['user'])){?>
+					<li>欢迎您，游客，您可以选择<a href="index.php?c=privilege&a=login" style="color:#ff66ff;">&nbsp;登陆</a>&nbsp;或
+			    	<a href="index.php?c=register&a=register" style="color:#66ff66;">注册</a></li>
+				<?php }else{?>
+			    <li style="">欢迎回来:<a href="index.php?c=manage&a=show&id=1&id1=manage"><font color="#ff66ff">&nbsp;<?php echo $_SESSION['user'];?></font>&nbsp;&nbsp;<img src="public/thumb/<?php echo $arr_infos['u_thumb'];?>" alt="" /></a></li>
+				<?php }?>
+			</ul>
+			<div id="search" style="width:712px;">
+				<form action="index.php?c=search&a=submit" method="post" accept-charset="utf-8">
+					带<font color="red">*</font>为必填项
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<font color="red">*</font>城市					
+					<input type="text" name="city" value="请输入城市名" title="请输入城市名" class="blink search-field" baiduSug="2" />
+					<font color="red">*</font>影院
+					<input type="text" name="cinema" value="请输入影院名字" title="请输入影院名字" class="blink search-field" />
+					<input type="submit" value="点击查询" class="search-button" />
+				</form>
+			</div>
+		</div>
+		<!-- end Sub-Menu -->
+		
+	</div>
+	<!-- end Header -->
+	
+	<!-- Main -->
+	<div id="main">
+		<!-- Content -->
+		<div id="content">
+
+			<!-- Box -->
+			<div class="box">
+				<div class="head">
+					<h2 style="font-size:18px;">电影列表&nbsp;&nbsp;&nbsp;</h2>&nbsp;
+					<div style="float:right;width:600px;margin-right:90px;">
+					<h2 style="float:right;font-size:14px;"><a href="index.php?c=index&a=show">默认排序</a>&nbsp;&nbsp;</h2>
+					<h2 style="float:right;font-size:14px;"><a href="index.php?c=index&a=show&id=i_score">评分最高</a>&nbsp;|&nbsp;</h2>
+					<h2 style="float:right;font-size:14px;"><a href="index.php?c=index&a=show&id=i_nation">按地区排序</a>&nbsp;|&nbsp;</h2>
+					<h2 style="float:right;font-size:14px;"><a href="index.php?c=index&a=show&id=i_length">按时长排序</a>&nbsp;|&nbsp;</h2>
+					<h2 style="float:right;font-size:14px;"><a href="index.php?c=index&a=show&id=i_date">最新发布</a>&nbsp;|&nbsp;</h2>
+					<p class="text-right">&nbsp;&nbsp;&nbsp;&nbsp;</p>
+					
+					
+					</div>
+				</div>
+
+				<!-- Movie -->
+				<?php for($i = 0,$length=count($arr_image);$i < $length;$i++):
+				$arr_reviews = $details -> getRows($arr_image[$i]['i_id'],'review');
+				$score = $arr_image[$i]['i_score'];
+				?>
+				<div class="movie" style="over-flow:hidden;height:370px;">
+					<div class="movie-image">
+						<a href="index.php?c=details&a=details&id=<?php echo $arr_image[$i]['i_id']?>"><img src="<?php echo 'admin/goodsImage/'.$arr_image[$i]['i_image']?>" alt="正在加载图片中" title="点击查看详情" /></a>
+					</div>
+					<div class="rating">
+						<p>电影名称:</p><br />
+						<p style="height:35px;width:152px;margin:5px 0;">
+							<a href="index.php?c=details&a=details&id=<?php echo $arr_image[$i]['i_id']?>"><?php echo $arr_image[$i]['i_name'];?></a>
+							<?php echo ''.$score>=$GLOBALS['config']['hot']['score'] && count($arr_reviews) >= $GLOBALS['config']['hot']['reviews'] ? '<font color=\''.$GLOBALS['config']['hot']['color'].'\'><i>'.$GLOBALS['config']['hot']['words'].'</i></font>': '';?>	
+						<?php //var_dump($arr_image[$i]['i_date']);exit;?>
+							<?php echo ''.(time() - strtotime($arr_image[$i]['i_date'])) <=$GLOBALS['config']['new']['interval'] ? '<font color=\''.$GLOBALS['config']['new']['color'].'\'><i>'.$GLOBALS['config']['new']['words'].'</i></font>': '';?>		
+						</p>
+						<br />
+						国家:<?php echo $arr_image[$i]['i_nation'].'<br />'?>
+						蒙多评分:&nbsp;<?php echo count($arr_reviews) > 0 ?($score > 0 ? ($score >= 9 ?'<font size=\'3\' color=\'red\'>'.$score.'</font>' : ($score <= 5 ?'<font size=\'3\' color=\'green\'>'.$score.'</font>' : '<font size=\'3\' color=\'#e7b038\'>'.$score.'</font>')) : '暂无'): '暂无';?><div style="width:55px;height:11px;background:url('public/images/stars.gif')no-repeat 0 <?php 
+						
+						if($score < 1 || count($arr_reviews) < 1){
+							$y = -110;
+						}elseif($score < 2){
+							$y = -99;
+						}elseif($score < 3){
+							$y = -88;
+						}elseif($score < 4){
+							$y = -77;
+						}elseif($score < 5){
+							$y = -66;
+						}elseif($score < 6){
+							$y = -55;
+						}elseif($score < 7){
+							$y = -44;
+						}elseif($score < 8){
+							$y = -33;
+						}elseif($score < 9){
+							$y = -22;
+						}elseif($score < 10){
+							$y = -11;
+						}else{
+							$y = 0;
+						}
+						echo $y;
+						?>px;"></div>
+						<span class="comments"><a href='index.php?c=review&a=show&id=<?php echo $arr_image[$i]['i_id']?>&id1=review'  title='点击评论'>点击评论,当前评论数:<?php echo count($arr_reviews);?></a></span>
+					</div>
+				</div>
+				<?php 
+				endfor;?>
+				<!-- end Movie -->
+				
+				
+				<div class="cl">&nbsp;</div>
+			</div>
+			<!-- end Box -->
+			
+			
+		</div>
+		<!-- end Content -->
+		<a name="news"></a>
+		<!-- NEWS -->
+		
+		<div id="news">
+			<div class="head" style="font-size:20px;margin-bottom:20px;">
+				<h3>相关新闻</h3>
+				<p class="text-right"></p>
+			</div>
+			<?php for($i = 0,$length=count($arr_news);$i < $length;$i++):
+				?>
+			<div class="content" style="font-size:16px;width:960px;margin-bottom:5px;">
+			<p class="date" style="font-size:17px;margin-bottom:5px;">新闻标题：</p>
+				
+				<h4 style="font-size:17px;"><?php echo $arr_news[$i]['n_title'];?></h4>
+				<p style="font-size:15px;"><?php echo $arr_news[$i]['n_contents'];?></p>
+				<p class="date" style="font-size:14px;margin-bottom:5px;float:right;">发布于：<?php echo date("Y年m月d日 H时i分s秒",$arr_news[$i]['n_date']);?></p>
+				<a style="float:right;" href="#top">回到顶部</a>
+			</div>
+			<?php endfor;?>
+		</div>
+		<!-- end NEWS -->
+		<div class="cl">&nbsp;</div>
+	</div>
+	<!-- end Main -->
+<!-- Movie -->
+
+				<!-- end Movie -->
+	<!-- Footer -->
+	<div id="footer" style="font-size:14px;">
+		<p>
+			<a href="index.php?c=index&a=show">首页</a> <span>|</span>
+			<a href="index.php?c=about&a=show">关于我们</a> <span>|</span>
+			<a href="index.php?c=manage&a=show">个人中心 </a><span>|</span>
+<span>|</span>
+			<?php if(isset($_SESSION['user'])){?>
+				<a href="index.php?c=privilege&a=logout" onclick="return confirm('确定退出吗?')">退出登录</a>
+			<?php }else{?>
+				<a href="index.php?c=privilege&a=login" >点击登录</a>
+			<?php }?>
+		</p>
+		<p> &copy; 2015 蒙多电影资讯网 All Rights Reserved.  Designed by <a href="http://www.lestatlee.com" target="_blank" title="Open The Future">lestatlee.com</a></p>
+	</div>
+	<!-- end Footer -->
+</div>
+<!-- end Shell -->
+</body>
+</html>

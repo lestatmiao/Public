@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>电影网管理中心 - 评论搜索结果 </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/general.css" rel="stylesheet" type="text/css" />
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<h1>
+<span class="action-span"><a href="goods.php?act=add">评论搜索结果</a></span>
+<span class="action-span1"><a href="">电影网 管理中心</a> </span><span id="search_id" class="action-span1"> - 电影列表 </span>
+<div style="clear:both"></div>
+</h1>
+
+<div class="list-div" id="listDiv">
+<form method="post" action="goods.php?act=search">
+	按用户名查询:
+	<input type="text" name="user" />
+	<input type="submit" name="submit" value="查询" />
+</form>
+<table width="100%" cellspacing="1" cellpadding="2" id="list-table">
+  <tr>
+  	<th>序号</th>
+  	<th>评论序号</th>
+    <th>评论人</th>
+    <th>所评论的影片</th>
+    <th>评论标题</th>
+    <th>评论内容</th>
+    <th>是否显示</th>
+    <th>评论时间</th>
+    <th>评论分数</th>
+    <th>操作</th>
+  </tr>
+<?php foreach($arr_res as $k => $v):?>
+  <tr align="center" class="0" id="0_6">
+  
+    <td align="left" class="first-cell" ><?php echo $k + 1;?></td>
+    <td><?php echo $v['r_id'];?></td>
+    <td><?php echo $v['r_user'];?></td>
+	<?php $arr_movie = $goods -> getMovieById($v['i_id']); ?>
+    <td><?php echo $arr_movie['i_name']?$arr_movie['i_name'] : '<font color=\'red\'>该影片不存在或已被删除</font>';?></td>
+    <td><?php echo $v['r_title'];?></td>
+    <td><?php echo $v['r_contents'];?></td>
+    <td><img src="images/<?php echo $v['r_is_allowed'] == 1 ?'yes' :'no' ;?>.gif"/></td>
+    <td><?php echo date('Y-m-d H:i:s',$v['r_date']);?></td>
+    <td align="right"><?php echo $v['r_score'];?></td>
+    <td width="24%" align="center">
+    <a href="goods.php?act=reviews_allow&id=<?php echo $v['r_id'];?>" title="显示/隐藏" onclick="return confirm('确定要更改当前状态喵？');">显示/隐藏</a>
+	<a href="goods.php?act=reviews_edit&id=<?php echo $v['r_id'];?>" title="编辑" >编辑</a>
+    <a href="goods.php?act=reviews_remove&id=<?php echo $v['r_id'];?>" title="移除" onclick="return confirm('确定要永久删除该评论喵？');">删除</a>
+    </td>
+  </tr>
+  
+<?php endforeach;?>
+  </table>
+
+  <table cellspacing="0" id="page-table">
+  <tr>
+    <td nowrap="true" align="right" style="background-color: rgb(255, 255, 255);">
+		
+    </td>
+  </tr>
+</table>
+
+</div>
+
+
+<div id="footer">
+
+版权所有 &copy; 电影网</div>
+
+</div>
+
+</body>
+</html>

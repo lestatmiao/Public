@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>影片信息管理中心 - 添加新闻 </title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/general.css" rel="stylesheet" type="text/css" />
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+<script src='ckeditor/ckeditor.js'>
+</script>
+</head>
+<body>
+
+<h1>
+<span class="action-span"><a href="goods.php?act=review">评论列表</a></span>
+<span class="action-span1"><a href="">影片信息管理中心</a> </span><span id="search_id" class="action-span1"> - 修改评论信息 </span>
+<div style="clear:both"></div>
+</h1>
+<!-- start add new category form -->
+<div class="main-div">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前正在操作的用户评论id:<input readonly='readonly' type='text' name='id' maxlength="20" value='<?php echo $arr_details['r_id'];?>' size='27' />
+  <form action="goods.php" method="post" name="theForm" >
+  <input type="hidden" name="act" value="reviews_update"/>
+  <input type="hidden" name="id" value="<?php echo $id;?>"/>
+  <table width="100%" id="general-table">
+	  <tr>
+        <td style="width:70px;" class="label">评论标题:</td>
+        <td>
+          <input type='text' name='title' maxlength="20" value='<?php echo $arr_details['r_title'];?>' size='27' />
+        </td>
+      </tr>
+      <tr>
+        <td style="width:70px;" class="label">评论信息:</td>
+        <td>
+          <textarea class="ckeditor" name="content" value=''><?php echo $arr_details['r_contents'];?></textarea>
+        </td>
+      </tr>
+	  <tr>
+        <td style="width:70px;" class="label">评论打分:</td>
+        <td>
+          <input type='text' name='score' maxlength="20" value='<?php echo $arr_details['r_score'];?>' size='27' />
+        </td>
+      </tr>
+	  <tr>
+        <td style="width:70px;" class="label">评论用户名:</td>
+        <td>
+          <input type='text' name='user' maxlength="20" value='<?php echo $arr_details['r_user'];?>' size='27' />
+        </td>
+      </tr>
+	  <tr>
+        <td style="width:70px;" class="label">评论日期:</td>
+        <td>
+          <input type='text' name='date' maxlength="20" value='<?php echo $arr_details['r_date'];?>' size='27' />
+        </td>
+      </tr>
+	  <tr>
+        <td style="width:70px;" class="label">被评论电影id:</td>
+        <td>
+          <input type='text' name='i_id' maxlength="20" value='<?php echo $arr_details['i_id'];?>' size='27' />
+        </td>
+      </tr>
+	  <tr>
+        <td style="width:70px;" class="label">评论是否允许被显示:</td>
+        <td>
+          <input type='text' name='allow' maxlength="20" value='<?php echo $arr_details['r_is_allowed']?>' size='27' />
+        </td>
+      </tr>
+      </table>
+      <div class="button-div">
+        <input type="submit" value=" 发布 " />
+        <input type="reset" value=" 重置 " />
+      </div>
+  </form>
+</div>
+
+
+
+<div id="footer">
+
+版权所有 &copy; 影讯网</div>
+
+</div>
+
+</body>
+</html>

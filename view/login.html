@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>蒙多电影资讯网登陆</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<meta name="keywords" content="蒙多电影网|LestatLee" />
+<link href="public/css/style_login.css" rel='stylesheet' type='text/css' />
+<script type="text/javascript" src="public/js/jquery.min.js"></script>
+</head>
+<body>
+<script>$(document).ready(function(c) {
+	$('.close').on('click', function(c){
+		$('.login-form').fadeOut('slow', function(c){
+	  		$('.login-form').remove();
+		});
+	});	  
+});
+</script>
+
+<h1>蒙多电影资讯网--会员登陆</h1>
+<div class="login-form">
+	<div class="head-info">
+		<label class="lbl-1"> </label>
+		<label class="lbl-2"> </label>
+		<label class="lbl-3"> </label>
+	</div>
+	<div class="clear"> </div>
+	<div class="avtar"><img src="public/images/avtar.png" /></div>
+	<form method='post' action='index.php?c=privilege&a=signin'>
+		<input type="hidden" name="id" value="<?php echo $this -> id;?>">
+		<input type="hidden" name="id1" value="<?php echo $this -> id1;?>">
+		<br /><font color='#888'>请输入用户名</font>
+		<input type="text" name='user' class="text" value="点击输入用户名" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '点击输入用户名';}" >
+		<br /><font color='#888'><br />请输入密码</font>
+		<div class="key">
+			<input type="password" name='pwd' value="" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '';}">
+			<font style='color:#ccc;'><font color='#888'>
+				<br />请输入下方验证码
+			</font>
+			<input type="text" name='captcha' class="text" value="">
+			<br /><br />
+			<img src="index.php?c=privilege&a=captcha" alt="CAPTCHA" style="cursor: pointer;" title="看不清？点击更换另一个验证码。" onclick="this.src='index.php?c=privilege&a=captcha&'+Math.random()" />
+			<br />
+			<input type="checkbox" name="rem" value="1" />
+			自动登录(账号将会保存7天)
+			<br />
+			<a style="color:#f2a223;text-decoration:underline;" href="index.php?c=index&a=show">继续以游客方式访问首页</a>
+			<br />
+			还没有账号?
+			<a href='index.php?c=register&a=register' style='color:red;'>点我注册</a>
+			</font>
+			</div><br />
+		<div class="signin"><input type="submit" value="点击登录" ></div>
+	</form>
+</div>
+<div class="copy-rights">
+	<p>Copyright &copy; 2015.蒙多电影资讯网 All rights reserved.<a target="_blank" href="http://www.lestatlee.com/">了解更多</a></p>
+</div>
+</body>
+</html>

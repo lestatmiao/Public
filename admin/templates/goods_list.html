@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>电影网管理中心 - 评论列表(待审核) </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/general.css" rel="stylesheet" type="text/css" />
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<h1>
+<span class="action-span"><a href="goods.php?act=add">评论列表(已审核)</a></span>
+<span class="action-span1"><a href="">电影网 管理中心</a> </span><span id="search_id" class="action-span1"> - 电影列表 </span>
+<div style="clear:both"></div>
+</h1>
+
+<div class="list-div" id="listDiv">
+
+<table width="100%" cellspacing="1" cellpadding="2" id="list-table">
+  <tr>
+  	<th>序号</th>
+    <th>电影名称</th>
+    <th>地区</th>
+    <th>主演</th>
+    <th>是否热映</th>
+    <th>电影时长</th>
+    <th>导演</th>
+    <th>操作</th>
+  </tr>
+<?php foreach($lists as $k => $v):?>
+  <tr align="center" class="0" id="0_6">
+  <?php if($v['i_is_delete'] == 0):?>
+    <td align="left" class="first-cell" ><?php echo $k + 1;?></td>
+    <td><?php echo $v['i_name'];?></td>
+    <td><?php echo $v['i_nation'];?></td>
+    <td><?php echo $v['i_starrings'];?></td>
+    <td><img src="images/<?php echo $v['i_is_hot'] == 1 ?'yes' :'no' ;?>.gif"/></td>
+    <td><?php echo $v['i_length'];?></td>
+    <td align="right"><?php echo $v['i_director'];?></td>
+    <td width="24%" align="center">
+      <a href="goods.php?act=change&id=<?php echo $v['i_id'];?>" title="修改">修改视频路径</a>
+      <a href="goods.php?act=remove&id=<?php echo $v['i_id'];?>" title="移除" onclick="return confirm('确定要将电影放入回收站喵？');">移除</a>
+    </td>
+  </tr>
+  <?php endif;?>
+<?php endforeach;?>
+  </table>
+
+  <table cellspacing="0" id="page-table">
+  <tr>
+    <td nowrap="true" align="right" style="background-color: rgb(255, 255, 255);">
+		<?php echo $page_str;?>
+    </td>
+  </tr>
+</table>
+
+</div>
+
+
+<div id="footer">
+
+版权所有 &copy; 电影网</div>
+
+</div>
+
+</body>
+</html>

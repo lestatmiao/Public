@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>影片信息管理中心 - 添加新电影 </title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/general.css" rel="stylesheet" type="text/css" />
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+<script src='ckeditor/adapters/jquery.min.js'></script>
+<script src='ckeditor/ckeditor.js'></script>
+<script src='ckeditor/adapters/jquery.js'></script>
+
+</head>
+<body>
+
+<h1>
+<span class="action-span"><a href="goods.php?act=list">电影列表</a></span>
+<span class="action-span1"><a href="">影片信息管理中心</a> </span><span id="search_id" class="action-span1"> - 添加新电影 </span>
+<div style="clear:both"></div>
+</h1>
+
+<script type="text/javascript">
+//此函数用来切换选项卡
+//参数 item 代表的当前点击的 span 的标识 例如 general
+function changeTab(item) {
+    //根据当前 item的 值，将对应的table显示 或者 隐藏
+    //定义可能性数组
+    var items_arr = ['general', 'detail', 'mix', 'gallery'];
+    //遍历
+    for(var i=0; i<items_arr.length; i++){
+        //判断
+        if(items_arr[i] == item) {
+            //找到当的，将对应的table显示
+            //通过拼凑table 的id 属性 的值 找到当前的 table
+            document.getElementById(items_arr[i] + '-table').style.display = 'table';
+            //找到当前的 span  更改其 class 使用 className代表 class属性
+            document.getElementById(items_arr[i] + '-tab').className = 'tab-front';
+        } else {
+            //不是当前的
+            document.getElementById(items_arr[i] + '-table').style.display = 'none';
+            document.getElementById(items_arr[i] + '-tab').className = 'tab-back';
+
+        }
+    }
+}
+</script>
+
+<!-- start goods form -->
+<div class="tab-div">
+    <!-- tab bar -->
+    <div id="tabbar-div">
+      <p>
+        <span class="tab-front" id="general-tab" onclick="changeTab('general')">基本信息</span>
+        <span class="tab-back" id="detail-tab" onclick="changeTab('detail')">剧情概要</span>
+        <span class="tab-back" id="mix-tab" onclick="changeTab('mix')">其他信息</span>
+      </p>
+    </div>
+
+    <!-- tab body -->
+    <div id="tabbody-div">
+      <form enctype="multipart/form-data" action="goods.php" method="post" name="theForm" >
+	    <input type="hidden" name="act" value="insert"/>
+
+        <!-- 通用信息内容 -->
+        <table width="90%" id="general-table" align="center">
+          <tr>
+            <td class="label"><span class="require-field">*</span>电影名称：</td>
+            <td><input type="text" name="i_name" value="" style="float:left;color:;" size="30" />
+            </td>
+          </tr>
+          <tr>
+            <td class="label"><span class="require-field">*</span>国家：</td>
+            <td><input type="text" name="i_nation" value="" size="20" /><span id="goods_sn_notice"></span><br />
+            </td>
+          </tr>
+          <tr>
+            <td class="label"><span class="require-field">*</span>电影分类：</td>
+            <td>
+            	<input type="checkbox" name="i_type[]" value="动画">动画
+            	<input type="checkbox" name="i_type[]" value="动作">动作
+            	<input type="checkbox" name="i_type[]" value="喜剧">喜剧
+            	<input type="checkbox" name="i_type[]" value="恐怖">恐怖
+            	<input type="checkbox" name="i_type[]" value="惊悚">惊悚
+            	<input type="checkbox" name="i_type[]" value="战争">战争
+            	<input type="checkbox" name="i_type[]" value="灾难">灾难
+            	<input type="checkbox" name="i_type[]" value="科幻">科幻
+            	<input type="checkbox" name="i_type[]" value="剧情">剧情
+            	<input type="checkbox" name="i_type[]" value="爱情">爱情
+            	<input type="checkbox" name="i_type[]" value="爱情动作">爱情动作
+            	<input type="checkbox" name="i_type[]" value="西部">西部
+            	<input type="checkbox" name="i_type[]" value="悬疑">悬疑
+            	<input type="checkbox" name="i_type[]" value="伦理">伦理
+            	<input type="checkbox" name="i_type[]" value="音乐">音乐
+            	<input type="checkbox" name="i_type[]" value="奇幻">奇幻
+            </td>
+          </tr>
+		  
+         <tr>
+            <td class="label"><span class="require-field">*</span>主演：</td>
+            <td><input type="text" name="i_starrings" value="" size="20" onblur="priceSetted()"/>
+            </td>
+          </tr>
+         <tr>
+            <td class="label"><span class="require-field">*</span>导演：</td>
+            <td><input type="text" name="i_director" value="" size="20" onblur="priceSetted()"/>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="label"><span class="require-field">*</span>上传电影图片：</td>
+            <td>
+              <input type="file" name="goods_image" size="35" />
+            </td>
+          </tr>
+
+        </table>
+        <!-- 商品通用信息内容结束 -->
+
+        <!-- 商品描述 -->
+        <table width="90%" id="detail-table" style="display:none">
+          <tr>
+            <td>
+            <textarea class="ckeditor" name="i_desc"></textarea>
+            </td>
+          </tr>
+		  <!--电影视频上传-->
+		     
+		  <tr>
+		  	
+            <td>
+            	评论内容
+            <textarea class="ckeditor" name="i_video" id="i_video"></textarea>
+            </td>
+          </tr>
+        </table>
+		<script>
+	CKEDITOR.replace('i_video',{customConfig:'custom.js'});
+</script>
+		
+
+        <!-- 商品的其他信息 -->
+        <table width="90%" id="mix-table" style="display:none" align="center">
+
+            <tr>
+            <td class="label"><span class="require-field">*</span>影片长度：</td>
+            <td><input type="text" name="i_length" value="1" size="20" /><br />
+            </td>
+          </tr>
+
+          <tr id="alone_sale_1">
+            <td class="label" id="alone_sale_2"><span class="require-field">*</span>热映：</td>
+            <td id="alone_sale_3"><input type="checkbox" name="i_is_hot" value="1" checked="checked" /> 打勾表示热映，否则不是。</td>
+          </tr>
+
+           <tr>
+            <td class="label"><span class="require-field">*</span>电影排序：</td>
+            <td><input type="text" name="i_sort" value="50" size="20" />
+            </td>
+          </tr>
+
+        </table>
+
+        <div class="button-div">
+
+          <input type="submit" value=" 确定 " class="button" />
+          <input type="reset" value=" 重置 " class="button" />
+        </div>
+        <input type="hidden" name="act" value="insert" />
+      </form>
+    </div>
+</div>
+<!-- end goods form -->
+<div id="footer">
+版权所有 &copy; 电影网</div>
+</div>
+
+</body>
+</html>

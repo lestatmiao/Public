@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+<head>
+	<title>蒙多电影资讯网--查询结果</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="public/css/style.css" type="text/css" media="all" />
+	<!--[if IE 6]>
+		<link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" />
+	<![endif]-->
+	<style>
+		table,tr,td,th{
+			font-size:15px;
+		}
+	</style>
+	<script type="text/javascript" src="public/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="public/js/jquery-func.js"></script>
+</head>
+<body>
+<!-- Shell -->
+<div id="shell">
+	<!-- Header -->
+	<div id="header">
+		<h1 id="logo"><a href="#">1</a></h1>
+		<h1><div style="color:#f2a223;float:left;font-size:28px;"><i><b>蒙多电影资讯网--查询结果</b></i></h1>
+		<a name="top"></a>
+		<h1 style="float:left;"></h1>
+		<!-- Navigation -->
+		<div class="social">
+			<span style='font-size:14px;margin-top:6px;margin-left:6px;'><label>点击右侧分享:</label></span><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+		</div>
+		<div id="navigation">
+			<ul>
+			    <li><a class="active" href="index.php?c=index&a=show">首页</a></li>
+			    <li><a href="index.php?c=manage&a=show&id=1&id1=manage">个人中心</a></li>
+			    <li><a href="index.php?c=about&a=show">关于我们</a></li>
+			    <?php 
+					if(isset($_SESSION['user'])){
+				?>
+				<li><a href="index.php?c=privilege&a=logout" onclick="return confirm('确定要退出吗?')">退出登录</a></li>
+				<?php }else{?>
+				<li><a href="index.php?c=privilege&a=login">点击登录</a></li>
+				<?php }?>
+			</ul>
+			<form action="http://www.baidu.com/baidu" target="_blank">
+				结果不满意?<input name=tn type=hidden value=baidu><a href="http://www.baidu.com/"></a><input type="text"  name="word"  size=30><input type="submit"  value="猛戳度娘"></td></tr></table></form>
+		</div>
+		<!-- end Navigation -->
+		
+		<!-- Sub-menu -->
+		<div id="sub-navigation">
+			<ul>
+			 <li><a href="index.php?c=index&a=show">回到首页</a></li>
+		</ul>
+			<div id="search">
+				<form action="index.php?c=search&a=submit" method="post" accept-charset="utf-8">
+					带<font color="red">*</font>为必填项
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<font color="red">*</font>城市					
+					<input type="text" name="city" value="请输入城市名" title="请输入城市名" class="blink search-field"  />
+					<font color="red">*</font>影院
+					<input type="text" name="cinema" value="请输入影院名字" title="请输入影院名字" class="blink search-field" />
+					<input type="submit" value="点击查询" class="search-button" />
+				</form>
+			</div>
+			
+	</div>
+	<!-- end Header -->
+	<!-- Main -->
+	<div id="main">
+		<!-- Content -->
+		
+		<div id="content">
+		 
+    
+			<!-- Box -->
+			<div style="margin-left:0;" class="box">
+				<div class="head">
+					<h3>近期上映电影列表</h3>
+				</div>
+				<!-- Movie -->
+                <!--一个影院一个div(最外层循环直接嵌套表格),之后一个循环一个表格-->
+				<p style="float:right;">为您直接跳转到:
+					<?php 
+					if(isset($length_total)){
+						for($i = 0;$i < $length_total;$i++){
+							$page = 1+$i;
+							if($page != 1){
+								echo "<a href='#$page'>第".($i+1)."家</a>"." ";
+							}
+					 	}
+					 }?>
+					</p>
+				<div class='cinema'>
+					<?php 
+						if(!isset($length_total)){
+							echo '<font size=\'3\'>请在右上方输入框内输入正确的城市名和影院名并确认网络畅通之后重试</font><br /><a href=\'index.php?c=index&a=show\'>点击返回首页</a>';
+							goto a;
+							exit;
+						}
+					?>
+					
+                <?php for($i = 0;$i < $length_total;$i++){
+                    $c_name = $xml -> result -> item[$i] -> name;
+                    $c_tele = $xml -> result -> item[$i] -> telephone;
+                    $c_addr = $xml -> result -> item[$i] -> address;
+                    $c_rat = $xml -> result -> item[$i] -> rating;
+                    $str = '当前为您搜索出的第'.($i + 1).'家影院 共'.$length_total.'家';
+                ?>
+				<?php if($i != 0){?>
+				<a style="float:right;" href="#top">回到顶部</a>
+				
+				<?php }?>
+				<a name="<?php echo ($i+1);?>"></a>
+                    <p style='font-size:22px;text-align:center;' align='center'><?php echo $str;?></p>
+					
+                    <br />
+                    <br />
+					
+                    <table width='980' id='cinema' rules='all'>
+                        <tr>
+                            <th>影院名称</th>
+                            <th>电话号码</th>
+                            <th>影院地址</th>
+                            <th>影院评分</th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $c_name;?></td>
+                            <td><?php echo $c_tele;?></td>
+                            <td><?php echo $c_addr;?></td>
+                            <td><?php echo '<font color=\'red\' size=\'4\'>'.$c_rat.'</font>/5.0';?></td>
+                        </tr>
+                    </table>
+                    <br />
+					
+                    <p style='font-size:22px;' align='center'>↓以下为<?php echo $c_name;?>近期上映的电影↓</p>
+                    <br />
+                    <?php
+                        $length_movies = count($xml -> result -> item[$i] ->movies -> item);
+                        for($k = 0;$k < $length_movies;$k++){
+                            $m_name = $xml -> result -> item[$i] -> movies -> item[$k] -> movie_name;
+                            $m_type = $xml -> result -> item[$i] -> movies -> item[$k] -> movie_type;
+                            $m_nation = $xml -> result -> item[$i] -> movies -> item[$k] -> movie_nation;
+                            $m_director = $xml -> result -> item[$i] -> movies -> item[$k] -> movie_director;
+                           $m_star = $xml -> result -> item[$i] -> movies -> item[$k] -> movie_starring;
+                            $m_date = $xml -> result -> item[$i] -> movies -> item[$k] -> movie_release_date;
+                            $m_len = $xml -> result -> item[$i] -> movies -> item[$k] -> movie_length;
+                            $m_des = $xml -> result -> item[$i] -> movies -> item[$k] -> movie_description;
+                            $m_sc = $xml -> result -> item[$i] -> movies -> item[$k] -> movie_score;
+                            $m_mess = $xml -> result -> item[$i] -> movies -> item[$k] -> movie_message;
+                            $m_tags = $xml -> result -> item[$i] -> movies -> item[$k] -> movie_tags;
+                            $m_time_table = $xml -> result -> item[$i] -> movies -> item[$k] -> time_table;
+							//echo '<pre>';
+                            //var_dump($m_time_table -> item[1]);exit;
+                    ?>
+                    <table style='border:1px dashed #ccc;' id='movies' rules='all'>
+                        <tr>
+                            <th>影片名称</th>
+                            <th>观看类型</th>
+                            <th>地区</th>
+                            <th>导演</th>
+                            <th>主演</th>
+                            <th>上映日期</th>
+                            <th>电影时长</th>
+                            <th>剧情概要</th>
+                            <th>电影评分</th>
+                            <th>电影相关</th>
+                            <th>影片类型</th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $m_name;?></td>
+                            <td><?php echo $m_type; ?></td>
+                            <td><?php echo $m_nation; ?></td>
+                            <td><?php echo $m_director; ?></td>
+                            <td><?php echo $m_star; ?></td>
+                            <td><?php echo $m_date; ?></td>
+                            <td><?php echo $m_len.'分钟'; ?></td>
+                            <td><?php echo $m_des; ?></td>
+                            <td><?php echo '<font size=\'4\' color=\'red\'>'.$m_sc.'</font>/10.0'; ?></td>
+                            <td><?php echo $m_mess; ?></td>
+                            <td><?php echo $m_tags; ?></td>
+                        </tr>
+                        </table>
+						<font size="3"><font color="gold"><?php echo $c_name,'--->',$m_name;?></font>放映时间安排表:</font>
+						<select>
+							<option>点击查看</option>
+							<?php foreach(($m_time_table -> item) as $v):
+								$time = $v -> time;
+								$date = $v -> date;
+							?>
+							<option><?php echo '时间 : '.$time.'&nbsp;&nbsp;<br />日期 : '.$date.'<br />';?></option>
+							<?php endforeach;?>
+						</select>
+                        <br />
+                    <?php }?>
+                    <br />
+                    <br />
+                    <hr />
+                    <br />
+                    <br />
+                <?php }?>
+			    </div>
+				<!-- end Movie -->
+				<div class="cl">&nbsp;</div>
+			</div>
+			<!-- end Box -->	
+		</div>
+		<!-- end Content -->
+		<?php a:?>
+	<!-- Footer -->
+	<div id="footer" style="font-size:14px;">
+		<p>
+			<a href="index.php?c=index&a=show">首页</a> <span>|</span>
+			<a href="index.php?c=about&a=show">关于我们 </a><span>|</span>
+			<a href="index.php?c=manage&a=show">个人中心 </a><span>|</span>
+			<?php if(isset($_SESSION['user'])){?>
+				<a href="index.php?c=privilege&a=logout" onclick="return confirm('确定退出吗?')">退出登录</a>
+			<?php }else{?>
+				<a href="index.php?c=privilege&a=login" >点击登录</a>
+			<?php }?>
+		</p>
+		<p> &copy; 2015 蒙多电影资讯网 All Rights Reserved.  Designed by <a href="http://www.lestatlee.com" target="_blank" title="Open The Future">lestatlee.com</a></p>
+	</div>
+	<!-- end Footer -->
+</div>
+<!-- end Shell -->
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>影片信息管理中心 - 编辑分类 </title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/general.css" rel="stylesheet" type="text/css" />
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<h1>
+<span class="action-span"><a href="category.php">影片分类</a></span>
+<span class="action-span1"><a href="">影片信息管理中心</a> </span><span id="search_id" class="action-span1"> - 编辑分类 </span>
+<div style="clear:both"></div>
+</h1>
+<!-- start add new category form -->
+<div class="main-div">
+
+  <form action="category.php" method="post" name="theForm" >
+  <input type="hidden" name="act" value="update"/>
+  <input type="hidden" name="id" value="<?php echo $lists['c_id'];?>">
+  <table width="100%" id="general-table">
+      <tr>
+        <td class="label">分类名称:</td>
+        <td>
+          <input type='text' name='category_name' maxlength="20" value='<?php echo $lists['c_name']?>' />
+        </td>
+      </tr>
+      <tr>
+        <td class="label">上级分类:</td>
+        <td>
+          <select name="parent_id">
+          <option value="0">顶级分类</option>
+          <?php foreach($categories as $k => $v):?>
+          <!--此处需要筛选之后显示，因为不能将选中要编辑的数据自身以及自身的子分类显示在下拉菜单中以免用户误操作-->
+          <?php if($v['c_id'] != $lists['c_id'] && $v['c_parent_id'] != $lists['c_id']):?>
+          <!--此处的判断在于默认选中用户当前准备操作分类的父分类-->
+          <?php if($v['c_id'] == $lists['c_parent_id']):?>
+		       <option value="<?php echo $lists['c_parent_id']; ?>" selected='selected'><?php echo str_repeat('&nbsp;',$v['level']*3).$v['c_name'];?></option>
+               <?php else:?>
+                    <option value="<?php echo $lists['c_parent_id']; ?>" ><?php echo str_repeat('&nbsp;',$v['level']*3).$v['c_name'];?></option>
+               <?php endif;?>
+               <?php endif;?>
+           <?php endforeach;?>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">排序:</td>
+        <td>
+          <input type='text' name='sort' maxlength="20" value='<?php echo $lists['c_sort']?>' />
+        </td>
+      </tr>
+      </table>
+
+      <div class="button-div">
+        <input type="submit" value=" 确定 " />
+        <input type="reset" value=" 重置 " />
+      </div>
+  </form>
+</div>
+
+
+
+<div id="footer">
+
+版权所有 &copy; 影讯网</div>
+
+</div>
+
+</body>
+</html>

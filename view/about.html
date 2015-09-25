@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+	<!--首页模板-->
+<head>
+	<title>蒙多电影资讯网--关于我们</title>
+	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="public/css/style.css" type="text/css" media="all" />
+	<!--[if IE 6]>
+		<link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" />
+	<![endif]-->
+	<script type="text/javascript" src="public/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="public/js/jquery-func.js"></script>
+</head>
+<body>
+<!-- Shell -->
+<div id="shell">
+	<!-- Header -->
+	<div id="header">
+		<h1 style="float:left;" id="logo"><a href="index.php?c=index&a=show">蒙多电影资讯网</a></h1>
+		<div style="color:#f2a223;float:left;font-size:28px;"><i><b>蒙多电影资讯网--关于我们</b></i></div>
+		<div class="social">
+			<span style='font-size:14px;margin-top:6px;margin-left:6px;'><label>点击右侧分享:</label></span><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+		</div>
+		
+		<!-- Navigation -->
+		<div id="navigation">
+			<ul>
+			    <li><a class="active" href="index.php?c=index&a=show">首页</a></li>
+			    <li><a href="index.php?c=manage&a=show">个人中心</a></li>
+			    <li><a href="index.php?c=about&a=show">关于我们</a></li>
+			    <?php 
+					if(isset($_SESSION['user'])){
+				?>
+				<li><a href="index.php?c=privilege&a=logout" onclick="return confirm('确定要退出吗?')">退出登录</a></li>
+				<?php }else{?>
+				<li><a href="index.php?c=privilege&a=login">点击登录</a></li>
+				<?php }?>
+			</ul>
+		</div>
+		<!-- end Navigation -->
+		
+		<!-- Sub-menu -->
+		<div id="sub-navigation" style="border-top:0px;">
+		</div>
+		<!-- end Sub-Menu -->
+		
+	</div>
+	<!-- end Header -->
+	
+	<!-- Main -->
+	<div id="main">
+		<!-- Content -->
+		<div id="content">
+
+			<!-- Box -->
+		
+			<!-- end Box -->
+			
+
+			<!-- end Box -->
+			
+		</div>
+		<!-- end Content -->
+
+		<!-- end NEWS -->
+		
+		<!-- Coming -->
+		<div style="width:900px;" id="coming">
+			<div class="head">
+				<h3 style="margin-bottom:20px;font-size:25px;">关于我们<strong></strong></h3>
+			</div>
+			
+			<div class="content">
+				<h4 style="margin-top:30px;margin-bottom:10px;font-size:25px;"><?php echo $arr_infos['w_title']?></h4>
+				<p style="line-height:22px;font-size:16px;"><?php echo $arr_infos['w_contents']?></p>
+				<br />
+				<p style="float:right;line-height:22px;font-size:16px;">发布人:蒙多</p><br /><br />
+				<p style="float:right;line-height:22px;font-size:16px;">时间:<?php echo date('Y年m月d日 H:i:s',$arr_infos['w_date'])?></p>
+				
+			</div>
+			
+		</div>
+		<!-- end Coming -->
+		<div class="cl">&nbsp;</div>
+	</div>
+			<div  style="font-size:16px;float:left;display:inline;">
+				
+		</div>
+		<div style="font-size:16px;float:right;display:inline;">
+				
+		</div>
+		
+		
+		<div id="sub-navigation" style="border:0px;margin-top:20px;">
+				
+		</div>
+		
+		
+	<!-- end Main -->
+
+	<!-- Footer -->
+	<div id="footer" style="font-size:14px;">
+		<p>
+			<a href="index.php?c=index&a=show">首页</a> <span>|</span>
+			<a href="index.php?c=about&a=show">关于我们 </a><span>|</span>
+			<a href="index.php?c=manage&a=show">个人中心 </a><span>|</span>
+			<?php if(isset($_SESSION['user'])){?>
+				<a href="index.php?c=privilege&a=logout" onclick="return confirm('确定退出吗?')">退出登录</a>
+			<?php }else{?>
+				<a href="index.php?c=privilege&a=login" >点击登录</a>
+			<?php }?>
+		</p>
+		<p> &copy; 2015 蒙多电影资讯网 All Rights Reserved.  Designed by <a href="http://www.lestatlee.com" target="_blank" title="Open The Future">lestatlee.com</a></p>
+	</div>
+	<!-- end Footer -->
+</div>
+<!-- end Shell -->
+</body>
+</html>

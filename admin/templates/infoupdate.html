@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>影片信息管理中心 - 更新影片路径 </title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/general.css" rel="stylesheet" type="text/css" />
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+<script src='ckeditor/adapters/jquery.min.js'></script>
+<script src='ckeditor/ckeditor.js'></script>
+<script src='ckeditor/adapters/jquery.js'></script>
+
+</head>
+<body>
+
+<h1>
+<span class="action-span"><a href="goods.php?act=list">电影列表</a></span>
+<span class="action-span1"><a href="">影片信息管理中心</a> </span><span id="search_id" class="action-span1"> - 更新影片路径</span>
+<div style="clear:both"></div>
+</h1>
+
+<script type="text/javascript">
+//此函数用来切换选项卡
+//参数 item 代表的当前点击的 span 的标识 例如 general
+function changeTab(item) {
+    //根据当前 item的 值，将对应的table显示 或者 隐藏
+    //定义可能性数组
+    var items_arr = ['general', 'detail', 'mix', 'gallery'];
+    //遍历
+    for(var i=0; i<items_arr.length; i++){
+        //判断
+        if(items_arr[i] == item) {
+            //找到当的，将对应的table显示
+            //通过拼凑table 的id 属性 的值 找到当前的 table
+            document.getElementById(items_arr[i] + '-table').style.display = 'table';
+            //找到当前的 span  更改其 class 使用 className代表 class属性
+            document.getElementById(items_arr[i] + '-tab').className = 'tab-front';
+        } else {
+            //不是当前的
+            document.getElementById(items_arr[i] + '-table').style.display = 'none';
+            document.getElementById(items_arr[i] + '-tab').className = 'tab-back';
+
+        }
+    }
+}
+</script>
+
+<!-- start goods form -->
+<div class="tab-div">
+    <!-- tab bar -->
+    <div id="tabbar-div">
+      <p>
+        <span class="tab-front" id="general-tab" onclick="changeTab('general')">影片路径</span>
+
+      </p>
+    </div>
+
+    <!-- tab body -->
+    <div id="tabbody-div">
+      <form enctype="multipart/form-data" action="goods.php" method="post" name="theForm" >
+	    <input type="hidden" name="id" value="<?php echo $id;?>"/>
+	    <input type="hidden" name="act" value="update"/>
+        <!-- 通用信息内容 -->
+        <table width="90%" id="general-table" align="center">
+         
+		  <tr>
+		  	
+            <td>
+            	影片视频路径上传(可选)
+            <textarea class="ckeditor" name="i_video" id="i_video"></textarea>
+            </td>
+          </tr>
+        </table>
+		<script>
+	CKEDITOR.replace('i_video',{customConfig:'custom.js'});
+</script>
+
+        </table>
+
+        <div class="button-div">
+
+          <input type="submit" value=" 确定 " class="button" />
+          <input type="reset" value=" 重置 " class="button" />
+        </div>
+       
+      </form>
+    </div>
+</div>
+<!-- end goods form -->
+<div id="footer">
+版权所有 &copy; 电影网</div>
+</div>
+
+</body>
+</html>

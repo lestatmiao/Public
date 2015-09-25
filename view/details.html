@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+	<!--首页模板-->
+<head>
+	<style>
+		embed{
+			height:310px;
+		}
+	</style>
+	<title>蒙多电影资讯网--影片详情</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="public/css/style.css" type="text/css" media="all" />
+	<!--[if IE 6]>
+		<link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" />
+	<![endif]-->
+	<script type="text/javascript" src="public/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="public/js/jquery-func.js"></script>
+</head>
+<body>
+	<a name="top"></a>
+<!-- Shell -->
+<div id="shell">
+	<!-- Header -->
+	<div id="header">
+		<h1 style="float:left;" id="logo"><a href="index.php?c=index&a=show">蒙多电影资讯网</a></h1>
+		<div style="color:#f2a223;float:left;font-size:28px;"><label><i><b>蒙多电影资讯网--影片详情</b></i></label></div>
+		<div class="social">
+			<span style='font-size:14px;margin-top:6px;margin-left:6px;'><label>点击右侧分享:</label></span><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+		</div>
+		
+		<!-- Navigation -->
+		<div id="navigation">
+			<ul>
+			    <li><a class="active" href="index.php?c=index&a=show">首页</a></li>
+			    <li><a href="index.php?c=manage&a=show">个人中心</a></li>
+			    <li><a href="index.php?c=about&a=show">关于我们</a></li>
+			    <?php 
+					if(isset($_SESSION['user'])){
+				?>
+				<li><a href="index.php?c=privilege&a=logout" onclick="return confirm('确定要退出吗?')">退出登录</a></li>
+				<?php }else{?>
+				<li><a href="index.php?c=privilege&a=login">点击登录</a></li>
+				<?php }?>
+			</ul>
+		</div>
+		<!-- end Navigation -->
+		
+		<!-- Sub-menu -->
+		<div id="sub-navigation" style="border:0px;">
+		</div>
+		<!-- end Sub-Menu -->
+	</div>
+	<!-- end Header -->
+	
+	<!-- Main -->
+	<div id="main" style="border-bottom:0px;margin-bottom:50px;">
+		<!-- Content -->
+		<div id="content">
+
+			<!-- Box -->
+		
+			<!-- end Box -->
+			
+
+			<!-- end Box -->
+			
+		</div>
+		<!-- end Content -->
+
+		<!-- end NEWS -->
+		
+		<!-- Coming -->
+		<div style="float:left;width:900px;height:280px;" id="coming">
+			<div class="head">
+				<h3>影片详情<strong></strong></h3>
+			</div>
+			<div class="movie-image" style="margin-right:18px;margin-top:15px;">
+						<img src="<?php echo 'admin/goodsImage/'.$arr_infos['i_image']?>" alt="非常抱歉,图片被任性的王尼玛藏起来了" />
+					</div>
+			<div style="margin-bottom:30px;" class="content">
+				<?php if(!$arr_infos){
+				header("location:index.php?a=*&^%&&^**");
+				exit;}?>
+				<h4 style="font-size:30px;"><?php echo $arr_infos['i_name']?><a style="float:right;font-size:14px;" href="index.php?c=review&a=show&id=<?php echo $arr_infos['i_id']?>&id1=review"><br />点击发表评论</a></h4>
+				<br />
+				<p>导演:<?php echo $arr_infos['i_director']?></p>
+				<p>主演:<?php echo $arr_infos['i_starrings']?></p>
+				<p>电影时长:<?php echo $arr_infos['i_length']?>分钟</p>
+				<p>国家:<?php echo $arr_infos['i_nation']?></p>
+				<p>类型:<?php echo $arr_infos['i_type']?></p>
+				<p>介绍:<?php echo $arr_infos['i_desc']?></p>
+			</div>
+		</div>
+		<!-- end Coming -->
+		<!--电影视频，如果未上传-->
+		<?php if($arr_infos['i_video']):?>
+		<div style="margin-bottom:50px;margin-top:70px;border:1px white;float:left;width:900px;height:280px;" id="coming">
+		
+		<h3 style="font-size:16px;">友情提示:由于<font color='red' size='5'>优(ben)酷(ren)视(mei)频(you)质(qian)量(chong)不(hui)高(yuan)</font>，<br />因此部分影片只提供了预告片或花絮的观看，敬请谅解<br />影片/预告片播放</h3>
+		<div style="margin-left:55px;border:0px solid red;width:480px;height:310px;clear:both;"><?php echo stripslashes($arr_infos['i_video'])?></div>
+		</div>
+		<div class="cl">&nbsp;</div>
+		<div style="margin-left:180px;" class="bdsharebuttonbox"><a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone">QQ空间</a><a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina">新浪微博</a><a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq">腾讯微博</a><a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren">人人网</a><a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin">微信</a><a href="#" style="color:red;" class="bds_more" data-cmd="more">更多分享！</a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{"bdSize":16},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"果断分享！","viewSize":"32"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+	</div>
+	<?php endif;?>
+	
+			<div  style="clear:both;font-size:16px;float:left;display:inline;">
+				<h3 style="margin-left:30px;">电影评论</h3>
+		</div>
+		<div style="font-size:16px;float:right;display:inline;">
+				总评论数:<?php echo count($arr_reviews)?>条
+		</div>
+		
+		<?php 
+		if(!$arr_reviews){
+			echo "<div style='width:auto;height:70px;margin:0 auto;'>";
+			echo '<p style="font-size:16px;text-align:center;margin-top:20px;">该电影当前还没有评论</p>';
+			echo "<a style=\"margin:0 auto;width:140px;display:block;text-align:center;font-size:24px;margin-top:24px;\" href='index.php?c=review&a=show&id={$arr_infos['i_id']}&id1=review'>我要抢沙发!</a>";
+			echo '</div>';
+			//exit;
+		}
+		$count = 0;
+		echo "<a style='float:right;margin-right:20px;' href='#bottom'>跳转到底部</a>";
+		foreach($arr_reviews as $v):$count++;?>
+		<div id="sub-navigation" style="margin-top:20px;">
+		
+				<p style="float:right;"><?php 
+					if($count == 1){
+						echo '<font color=\'red\'>沙发</font>';
+					}elseif($count == 2){
+						echo '<font color=\'yellow\'>板凳</font>';
+					}elseif($count == 3){
+						echo '<font color=\'blue\'>地板</font>';
+					}elseif($count == 4){
+						echo '<font color=\'green\'>地下室</font>';
+					}else{
+						echo $count.'楼';
+					}
+				?></p>
+				<p>用户:<font color="#ff66ff"><?php echo $v['r_user']?></font>&nbsp;&nbsp;<img src="public/thumb/<?php 
+				//此处要显示评论发表用户的头像，就需要调用个人中心模型
+				$id = $v['r_user'];
+				$user = new Manage();
+				$arr_infos = $user -> getUserInfo($id);
+				echo $arr_infos['u_thumb'];
+				?>" alt=""></p>
+				<br />
+				<p>标题:<?php echo $v['r_title']?></p>
+				<p>内容:<?php echo stripslashes($v['r_contents'])?></p>
+				<p>发表于:<?php echo date('Y-m-d H:i:s',$v['r_date']);?></p>
+		</div>
+		<?php endforeach;?>
+		
+	<!-- end Main -->
+
+	<!-- Footer -->
+	<a style="float:right;" href="#top">返回顶部</a>
+	<div id="footer" style="font-size:14px;">
+		<p>
+			<a href="index.php?c=index&a=show">首页</a> <span>|</span>
+			<a href="index.php?c=about&a=show">关于我们 </a><span>|</span>
+			<a href="index.php?c=manage&a=show">个人中心 </a><span>|</span>
+			<?php if(isset($_SESSION['user'])){?>
+				<a href="index.php?c=privilege&a=logout" onclick="return confirm('确定退出吗?')">退出登录</a>
+			<?php }else{?>
+				<a href="index.php?c=privilege&a=login" >点击登录</a>
+			<?php }?>
+		</p>
+		<a name="bottom"></a>
+		<p> &copy; 2015 蒙多电影资讯网 All Rights Reserved.  Designed by <a href="http://www.lestatlee.com" target="_blank" title="Open The Future">lestatlee.com</a></p>
+	</div>
+	<!-- end Footer -->
+</div>
+<!-- end Shell -->
+</body>
+</html>

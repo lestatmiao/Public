@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<title>电影评论</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" type="text/css" href="public/css/skin.css" />
+<script type="text/javascript">
+    function logout() {
+        window.confirm('您确定要退出吗?');
+        window.location.href = './login.html';
+    }
+</script>
+<script src='Public/ckeditor/adapters/jquery.min.js'></script>
+<script src='Public/ckeditor/ckeditor.js'></script>
+<script src='Public/ckeditor/adapters/jquery.js'></script>
+
+
+<style type="text/css">
+
+</style>
+</head>
+    <body>
+        <div id="body">
+            <div id="nav" style="color:#666666;height:35px;">
+            	<span style="margin-left:10px;color:#f2a223;float:left;font-size:28px;"><label><i><b>蒙多电影资讯网--评论页面</b></i></label></span>
+                <ul>
+                    <li><a href="index.php?c=details&a=details&id=<?php echo $arr_infos['i_id']?>" onclick="return confirm('确定要放弃当前评论吗?')">查看详情</a></li>
+					<li><a href="index.php?c=index&a=show" onclick="return confirm('确定要放弃当前评论吗?')">返回首页</a></li>
+                </ul>
+            </div>
+            <div id="cont" style="padding-bottom:10px;">
+
+                <div class="mes" style="padding-bottom:0px;">
+                    <div id="lev" style="display:block;border:none;">
+                        <form action="index.php?c=review&a=submit" method="POST" style="margin:15px;">
+						<input type="hidden" name="id" value="<?php echo $arr_infos['i_id']?>" />
+						<?php 
+							if(!$arr_infos['i_name']){
+								header("location:index.php?a=&^&%*($");
+								exit;
+							}
+						?>
+                            当前评论的电影是：<span><font size="3" color="blue"><b><?php echo $arr_infos['i_name']?></b></font>(带<font color="red">*</font>号选项为必填项)</span><br /><br />
+                            <font color="red">*</font>标题：<input type="text" name="title" value="" />(评论标题长度在20以内)<br />
+                            <font color="red">*</font>评分：<select name="score">
+                            	<option value="">请选择</option>
+                            	<option value="1">1</option>
+                            	<option value="2">2</option>
+                            	<option value="3">3</option>
+                            	<option value="4">4</option>
+                            	<option value="5">5</option>
+                            	<option value="6">6</option>
+                            	<option value="7">7</option>
+                            	<option value="8">8</option>
+                            	<option value="9">9</option>
+                            	<option value="10">10</option>
+                            </select>(1-10分)<br />
+                            <font color="red">*</font>内容：<br />
+							<!--使用在线文本编辑器-->
+                            <textarea id="content" name="content"></textarea>(评论内容长度在300以内)<br />
+							
+<script>
+	CKEDITOR.replace('content',{customConfig:'custom.js'});
+</script>
+				<span><font color="red">*</font>请输入右侧验证码
+			</font>
+			<input type="text" name='captcha' class="text" value=""></span>
+			<img src="index.php?c=privilege&a=captcha" alt="CAPTCHA" style="cursor: pointer;margin-top:12px;width:180px;height:25px;" title="看不清？点击更换另一个验证码。" onclick="this.src='index.php?c=privilege&a=captcha&'+Math.random()" />
+			<br />
+                            <input style="font-weight:bold;background-color:#f2a223;width:90px;height:35px;font-size:25px;line-height:25px;" class="c1" type="submit" value="提交" />
+							<input style="font-weight:bold;background-color:#f2a223;width:90px;height:35px;font-size:25px;line-height:25px;" class="c1" type="reset" value="重填" />
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+            <div id="foot">
+                <p>
+			<a href="index.php?c=index&a=show" onclick="return confirm('确定要放弃当前评论吗?')">首页</a> <span>|</span>
+			<a href="index.php?c=about&a=show" onclick="return confirm('确定要放弃当前评论吗?')">关于我们</a> <span>|</span>
+			<a href="index.php?c=manage&a=show" onclick="return confirm('确定要放弃当前评论吗?')">个人中心 </a><span>|</span>
+			<a href="index.php?c=privilege&a=logout" onclick="return confirm('确定退出吗?')">退出登录</a>
+		</p>
+		<p> &copy; 2015 蒙多电影资讯网 All Rights Reserved.  Designed by <a href="http://www.lestatlee.com" target="_blank" title="Open The Future" onclick="return confirm('确定要放弃当前评论吗?')">lestatlee.com</a></p>
+            </div>
+        </div>
+    </body>
+</html>
